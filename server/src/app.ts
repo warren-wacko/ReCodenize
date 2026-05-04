@@ -5,7 +5,7 @@ import { env } from "./config/env.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import { authRoutes } from "./routes/auth.routes.js";
 import { promptsRoutes } from "./routes/prompts.routes.js";
-import { auth } from "google-auth-library";
+
 export const app = express();
 
 app.use(
@@ -23,9 +23,5 @@ app.use("/api/prompts", promptsRoutes);
 app.get("/api/health", (_req, res) => {
   res.json({ ok: true });
 });
-
-// Routes will go here:
-// app.use('/api/auth', authRoutes)
-// app.use('/api/prompts', promptsRoutes)
 
 app.use(errorHandler);
