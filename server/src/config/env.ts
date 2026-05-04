@@ -7,7 +7,10 @@ const envSchema = z.object({
   MONGODB_URI: z.string().url(),
   JWT_SECRET: z.string().min(32),
   GOOGLE_CLIENT_ID: z.string().min(1),
-  CLIENT_URL: z.string().url(),
+  CLIENT_URL: z
+    .string()
+    .url()
+    .transform((url) => url.replace(/\/$/, "")),
 });
 
 const parsed = envSchema.safeParse(process.env);
