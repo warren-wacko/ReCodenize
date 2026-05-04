@@ -3,7 +3,6 @@ import { z } from "zod";
 import { UserModel } from "../models/User.js";
 import { verifyGoogleIdToken } from "../lib/google.js";
 import { signJwt } from "../lib/jwt.js";
-import { env } from "../config/env.js";
 import { ApiError } from "../middleware/errorHandler.js";
 
 export const googleAuthSchema = z.object({
@@ -12,9 +11,8 @@ export const googleAuthSchema = z.object({
 
 const cookieOptions = {
   httpOnly: true,
-  secure: env.NODE_ENV === "production",
-  sameSite:
-    env.NODE_ENV === "production" ? ("none" as const) : ("lax" as const),
+  secure: true,
+  sameSite: "none" as const,
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
