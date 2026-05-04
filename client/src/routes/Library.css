@@ -1,0 +1,377 @@
+/* Library — Variant A (Dashboard with stats)
+   Scoped under .lib-shell so the rules don't leak. The shared .tool-tag /
+   .lp-chip / .section-tag classes already live in index.css. */
+
+.lib-shell {
+  padding: 32px 20px 80px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .lib-shell { padding: 32px 40px 80px; }
+}
+
+/* HEADER */
+.lib-shell .lib-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.lib-shell .lib-h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 4.5vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-top: 8px;
+}
+.lib-shell .lib-sub {
+  font-size: 13px;
+  color: var(--lp-text-mid);
+  margin-top: 6px;
+  max-width: 520px;
+}
+
+/* Buttons (the design's specific styling — different padding/glow than shadcn) */
+.lib-shell .lib-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 6px;
+  background: var(--lp-accent);
+  border: 0;
+  color: var(--lp-accent-fg);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 12px var(--lp-accent-glow);
+  transition: filter 0.12s;
+}
+.lib-shell .lib-btn-primary:hover { filter: brightness(1.08); }
+
+/* STATS GRID */
+.lib-shell .lib-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--lp-border);
+  border: 1px solid var(--lp-border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+@media (max-width: 900px) {
+  .lib-shell .lib-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .lib-shell .lib-stats { grid-template-columns: 1fr; }
+}
+.lib-shell .lib-stat {
+  background: var(--lp-bg2);
+  padding: 18px 20px;
+}
+.lib-shell .lib-stat-n {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--lp-text);
+}
+.lib-shell .lib-stat-l {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lp-text-dim);
+  margin-top: 6px;
+}
+
+/* TOOLBAR */
+.lib-shell .lib-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.lib-shell .lib-tabs {
+  display: inline-flex;
+  padding: 2px;
+  background: var(--lp-bg2);
+  border: 1px solid var(--lp-border);
+  border-radius: 8px;
+}
+.lib-shell .lib-tab {
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--lp-text-mid);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.12s, color 0.12s;
+  font-family: var(--font-sans);
+}
+.lib-shell .lib-tab:hover { color: var(--lp-text); }
+.lib-shell .lib-tab.active {
+  background: var(--lp-bg3);
+  color: var(--lp-text);
+}
+.lib-shell .lib-tab-n {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--lp-bg);
+  color: var(--lp-text-dim);
+}
+.lib-shell .lib-tab.active .lib-tab-n {
+  color: var(--lp-accent);
+  background: var(--lp-accent-dim);
+}
+
+.lib-shell .lib-tools-r {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.lib-shell .lib-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.lib-shell .lib-search-wrap > svg {
+  position: absolute;
+  left: 10px;
+  color: var(--lp-text-dim);
+}
+.lib-shell .lib-search-wrap input {
+  width: 240px;
+  padding: 8px 12px 8px 32px;
+  background: var(--lp-bg2);
+  border: 1px solid var(--lp-border);
+  border-radius: 6px;
+  color: var(--lp-text);
+  font: 400 13px/1.4 var(--font-sans);
+  outline: none;
+}
+.lib-shell .lib-search-wrap input:focus { border-color: var(--lp-accent); }
+@media (max-width: 600px) {
+  .lib-shell .lib-search-wrap input { width: 100%; }
+  .lib-shell .lib-search-wrap { flex: 1; }
+}
+
+.lib-shell .lib-select {
+  background: var(--lp-bg);
+  border: 1px solid var(--lp-border);
+  border-radius: 6px;
+  color: var(--lp-text);
+  font: 400 13px/1 var(--font-sans);
+  padding: 8px 28px 8px 10px;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23666' stroke-width='1.2' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+.lib-shell .lib-select:focus { border-color: var(--lp-accent); }
+
+/* GRID */
+.lib-shell .lib-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 1100px) {
+  .lib-shell .lib-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .lib-shell .lib-grid { grid-template-columns: 1fr; }
+}
+
+/* CARD */
+.lib-shell .lib-card {
+  background: var(--lp-bg2);
+  border: 1px solid var(--lp-border);
+  border-radius: 10px;
+  padding: 16px 18px 12px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  transition: border-color 0.15s, transform 0.15s;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  color: var(--lp-text);
+}
+.lib-shell .lib-card:hover {
+  border-color: var(--lp-border-hi);
+  transform: translateY(-2px);
+}
+.lib-shell .lib-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.lib-shell .lib-vis {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+.lib-shell .lib-vis.public {
+  color: var(--lp-accent);
+  background: var(--lp-accent-dim);
+}
+.lib-shell .lib-vis.private {
+  color: var(--lp-text-dim);
+  background: var(--lp-bg3);
+}
+.lib-shell .lib-card-title {
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+.lib-shell .lib-card-desc {
+  font-size: 12.5px;
+  color: var(--lp-text-mid);
+  line-height: 1.55;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.lib-shell .lib-card-stack {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  min-height: 22px;
+}
+.lib-shell .lib-stack-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--lp-border);
+  color: var(--lp-text-mid);
+}
+.lib-shell .lib-stack-more {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--lp-text-dim);
+}
+.lib-shell .lib-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--lp-border);
+  margin-top: auto;
+}
+.lib-shell .lib-card-stats {
+  display: flex;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--lp-text-dim);
+}
+.lib-shell .lib-card-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.lib-shell .lib-card-actions {
+  display: flex;
+  gap: 4px;
+}
+.lib-shell .lib-icon-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--lp-text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+}
+.lib-shell .lib-icon-btn:hover {
+  background: var(--lp-bg3);
+  color: var(--lp-text);
+}
+.lib-shell .lib-icon-btn.lib-danger:hover { color: var(--lp-red); }
+
+/* "+ New prompt" trailing tile */
+.lib-shell .lib-card-add {
+  background: transparent;
+  border: 1px dashed var(--lp-border);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--lp-text-dim);
+  font-size: 13px;
+  min-height: 200px;
+  transition: border-color 0.12s, color 0.12s;
+}
+.lib-shell .lib-card-add:hover {
+  border-color: var(--lp-accent);
+  color: var(--lp-accent);
+  transform: none;
+}
+.lib-shell .lib-card-add-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--lp-bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Empty state */
+.lib-shell .lib-empty {
+  text-align: center;
+  padding: 64px 24px;
+  background: var(--lp-bg2);
+  border: 1px dashed var(--lp-border);
+  border-radius: 12px;
+}
+.lib-shell .lib-empty h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+.lib-shell .lib-empty p {
+  font-size: 13px;
+  color: var(--lp-text-mid);
+  margin-bottom: 20px;
+}
+
+/* Load more */
+.lib-shell .lib-load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}

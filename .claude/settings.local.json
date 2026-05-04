@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(unzip -l ReCodenize-handoff.zip)",
+      "Bash(unzip -o ReCodenize-handoff.zip -d \"_handoff\")",
+      "Bash(unzip -l \"c:\\\\Users\\\\Warren\\\\Documents\\\\project\\\\ReCodenize\\\\ReCodenize.zip\")",
+      "Bash(unzip -o ReCodenize.zip -d \"_handoff2\")",
+      "Bash(unzip -o ReCodenize.zip -d \"_handoff3\")",
+      "Bash(unzip -o ReCodenize.zip -d \"_handoff4\" \"New Prompt Redesign.html\" \"newprompt-variations.jsx\")"
+    ]
+  }
+}

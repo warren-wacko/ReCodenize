@@ -1,0 +1,179 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-sans: 'DM Sans', sans-serif;
+    --font-heading: 'Instrument Serif', serif;
+    --font-mono: 'DM Mono', monospace;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Force dark theme globally — values from the Landing handoff design.
+   --lp-* are the raw design tokens; the shadcn vars below alias them so
+   every existing primitive (Card, Button, Input, Badge, Dropdown) picks
+   up the new palette automatically. */
+:root {
+    --lp-bg: oklch(10% 0.012 260);
+    --lp-bg2: oklch(13% 0.014 260);
+    --lp-bg3: oklch(16% 0.016 255);
+    --lp-border: oklch(25% 0.018 255);
+    --lp-border-hi: oklch(35% 0.022 255);
+    --lp-text: oklch(92% 0.006 255);
+    --lp-text-mid: oklch(65% 0.010 255);
+    --lp-text-dim: oklch(42% 0.010 255);
+    --lp-accent: oklch(82% 0.22 130);
+    --lp-accent-dim: oklch(82% 0.22 130 / 0.12);
+    --lp-accent-glow: oklch(82% 0.22 130 / 0.35);
+    --lp-accent-fg: oklch(12% 0.01 130);
+    --lp-red: oklch(70% 0.18 25);
+    --lp-blue: oklch(72% 0.14 240);
+    --lp-purple: oklch(72% 0.15 295);
+
+    --background: var(--lp-bg);
+    --foreground: var(--lp-text);
+    --card: var(--lp-bg2);
+    --card-foreground: var(--lp-text);
+    --popover: var(--lp-bg2);
+    --popover-foreground: var(--lp-text);
+    --primary: var(--lp-accent);
+    --primary-foreground: var(--lp-accent-fg);
+    --secondary: var(--lp-bg3);
+    --secondary-foreground: var(--lp-text);
+    --muted: var(--lp-bg3);
+    --muted-foreground: var(--lp-text-mid);
+    --accent: var(--lp-bg3);
+    --accent-foreground: var(--lp-text);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: var(--lp-border);
+    --input: var(--lp-border);
+    --ring: var(--lp-accent);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.625rem;
+    --sidebar: var(--lp-bg2);
+    --sidebar-foreground: var(--lp-text);
+    --sidebar-primary: var(--lp-accent);
+    --sidebar-primary-foreground: var(--lp-accent-fg);
+    --sidebar-accent: var(--lp-bg3);
+    --sidebar-accent-foreground: var(--lp-text);
+    --sidebar-border: var(--lp-border);
+    --sidebar-ring: var(--lp-accent);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}
+
+/* ============ DESIGN-SYSTEM UTILITIES ============
+   Reusable classes lifted from the Landing handoff so every route
+   speaks the same visual language. Kept in plain CSS (not @apply) so
+   the values track the Landing prototype 1:1. */
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lp-accent);
+  display: block;
+}
+
+.section-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.tool-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.tool-tag-cursor      { background: oklch(70% 0.18 25 / 0.15);  color: var(--lp-red); }
+.tool-tag-claude-code { background: oklch(72% 0.14 240 / 0.15); color: var(--lp-blue); }
+.tool-tag-copilot     { background: oklch(72% 0.15 295 / 0.15); color: var(--lp-purple); }
+.tool-tag-chatgpt     { background: oklch(82% 0.22 130 / 0.12); color: var(--lp-accent); }
+.tool-tag-aider       { background: oklch(72% 0.14 170 / 0.15); color: oklch(72% 0.14 170); }
+.tool-tag-other       { background: oklch(72% 0.04 255 / 0.15); color: var(--lp-text-mid); }
+
+.lp-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--lp-border);
+  color: var(--lp-text-dim);
+  cursor: pointer;
+  transition: border-color 0.12s, color 0.12s, background 0.12s;
+  background: transparent;
+}
+.lp-chip:hover {
+  border-color: var(--lp-border-hi);
+  color: var(--lp-text-mid);
+}
+.lp-chip.active {
+  border-color: var(--lp-accent);
+  color: var(--lp-accent);
+  background: var(--lp-accent-dim);
+}
